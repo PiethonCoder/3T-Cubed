@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/PiethonCoder/clean.css/versions/clean@1.4.css">
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <title>3T&#179;</title>
+</head>
+
+<body class="!overflow">
+    <main id="zone" class="h100 w100">
+        <section class="h10 w100 flex" style="background:#f5f5f5">
+            <div class="left h100 w10 flex">
+                <h1 class="rem2 "><span class="fcolor1">3</span><span class="text-main">T&#179;</span></h1>
+            </div>
+
+            <div class="h100 w40 flex" style="background:url(https://www.transparenttextures.com/patterns/gplay.png);">
+                <h1>Player X: </h1>
+                <h3 class="margin10-left-right fcolor1">{{xscore}}</h3>
+
+                <h1>Player O: </h1>
+                <h3 class="fcolor2 margin10-left-right">{{oscore}}</h3>
+            </div>
+
+        </section>
+        <section class="h90 w100 flex">
+
+            <div class="w20 h100">
+                <div class="w100 h20 flex" id="px">
+                    <h1 id="playerx" class="h50 w50 white flex" style="background:rgb(80, 211, 178);">Player X</h1>
+                </div>
+
+                <div class="w100 h75">
+                    <div class=" w100 h100 grid5 z300 top" id="color-grid-x"></div>
+                    <div class="w100 h100 grid5 z200 !opacity top" id="gradient-grid-x"></div>
+                    <div class="w100 h100 grid5 z100 !opacity top" id="image-grid-x"></div>
+                </div>
+
+                <div class="w100 h5 white3 flex margin20*">
+                    <div id="color-x"><i class="fas fa-palette rem2 pointer fco"></i></div>
+                    <div id="gradient-x"><i class="fas fa-adjust rem2 pointer"></i></div>
+                    <div id="image-x"><i class="far fa-images rem2 pointer"></i></div>
+                </div>
+            </div>
+
+            <div id="canvas" class="w60 h100 white2 flex-column">
+
+                <!-- winner popup -->
+                <div id="winner" class="h100 w100 center z1000 !display">
+                    <div class="flex w100 h10">
+                        <h1 class="rem3">Winner&nbsp;</h1> <span class="rem3.5 fcolor1 font-montserrat" id="winner_name"></span>
+                    </div>
+                    <div id="again" class="button4 bottom margin30-bottom h3">
+                        <p>Again</p>
+                    </div>
+                </div>
+
+                <!-- 3d manipulator -->
+                <div id="dragContainer" class="h15 w10 black top-right margin50 rounded flex">
+                    <div id="draggable" class="w15 h15 round grey "></div>
+                </div>
+
+                <div id="game_board">
+                    <div class="grid3 gap25 plane override-gs z300">
+                        <cube class="layer1 z300" id="1-0"></cube>
+                        <cube class="layer1 z200" id="1-1"></cube>
+                        <cube class="layer1 z100" id="1-2"></cube>
+                        <cube class="layer2 z300" id="1-3"></cube>
+                        <cube class="layer2 z200" id="1-4"></cube>
+                        <cube class="layer2 z100" id="1-5"></cube>
+                        <cube class="layer3 z300" id="1-6"> </cube>
+                        <cube class="layer3 z200" id="1-7"></cube>
+                        <cube class="layer3 z100" id="1-8"></cube>
+                    </div>
+
+                    <div class="grid3 gap25 plane override-gs z200">
+                        <cube class="layer1 z300" id="2-0"></cube>
+                        <cube class="layer1 z200" id="2-1"></cube>
+                        <cube class="layer1 z100" id="2-2"></cube>
+                        <cube class="layer2 z300" id="2-3"></cube>
+                        <cube class="layer2 z200" id="2-4"></cube>
+                        <cube class="layer2 z100" id="2-5"></cube>
+                        <cube class="layer3 z300" id="2-6"> </cube>
+                        <cube class="layer3 z200" id="2-7"></cube>
+                        <cube class="layer3 z100" id="2-8"></cube>
+                    </div>
+
+                    <div class="grid3 gap25 plane override-gs z100">
+                        <cube class="layer1 z300" id="3-0"></cube>
+                        <cube class="layer1 z200" id="3-1"></cube>
+                        <cube class="layer1 z100" id="3-2"></cube>
+                        <cube class="layer2 z300" id="3-3"></cube>
+                        <cube class="layer2 z200" id="3-4"></cube>
+                        <cube class="layer2 z100" id="3-5"></cube>
+                        <cube class="layer3 z300" id="3-6"> </cube>
+                        <cube class="layer3 z200" id="3-7"></cube>
+                        <cube class="layer3 z100" id="3-8"></cube>
+                    </div>
+                </div>
+                <div id="notice" class="w100 black bcolor1 bottom flex">
+                    <h1>Pick A Color</h1>
+                </div>
+            </div>
+
+            <div class="w20 h100 flex-column">
+                <div class="w100 h20 flex" id="po">
+                    <h1 id="playero" class="h50 w50 white flex">Player O</h1>
+                </div>
+                <div class="w100 h75">
+                    <div class=" w100 h100 grid5 z300 top" id="color-grid-o"></div>
+                    <div class="w100 h100 grid5 z200 !opacity top" id="gradient-grid-o"></div>
+                    <div class="w100 h100 grid5 z100 !opacity top" id="image-grid-o"></div>
+                </div>
+
+                <div class="w100 h5 white3 flex margin20*">
+                    <div id="color-o"><i class="fas fa-palette rem2 pointer fco"></i></div>
+                    <div id="gradient-o"><i class="fas fa-adjust rem2 pointer"></i></div>
+                    <div id="image-o"><i class="far fa-images rem2 pointer"></i></div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-1.12.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src="index.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.min.js"></script>
+    <script src="gradient.js"></script>
+
+</body>
+
+</html>

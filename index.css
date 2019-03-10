@@ -1,0 +1,82 @@
+:root {
+    --color1: rgb(191, 61, 85);
+    --color2: rgb(108, 135, 221);
+    --color3: rgb(255, 240, 147);
+    --color4: rgb(249, 107, 119);
+    --text-main: #000;
+    --grid-height: 0px;
+    --cube-size: 75px;
+    --cube-half: 37.5px;
+    --cube-half-neg: -37.5px;
+}
+.\!opacity {
+    opacity: 0;
+}
+#canvas {
+    background: linear-gradient(90deg, rgba(180, 180, 180, .1), rgba(180, 180, 180, .1)), url(https://www.toptal.com/designers/subtlepatterns/patterns/tic-tac-toe.png);
+}
+.wrap {
+    perspective: 800px;
+    perspective-origin: 50% 100px;
+}
+.cube {
+    position: relative;
+    width: var(--cube-size);
+    transform-style: preserve-3d;
+}
+.cube div {
+    position: absolute;
+    width: var(--cube-size);
+    height: var(--cube-size);
+}
+.override-gs {
+    grid-auto-rows: minmax(0, 67px);
+}
+.\!back {
+    transform: translateZ(var(--cube-half-neg)) rotateY(180deg);
+    filter: grayscale(.0);
+}
+.\!right {
+    transform: rotateY(-270deg) translateX(var(--cube-half));
+    transform-origin: top right;
+    filter: grayscale(.5);
+}
+.\!left {
+    transform: rotateY(270deg) translateX(var(--cube-half-neg));
+    transform-origin: center left;
+    filter: grayscale(.5)
+}
+.\!top {
+    transform: rotateX(-90deg) translateY(var(--cube-half-neg));
+    transform-origin: top center;
+    filter: grayscale(.3)
+}
+.\!bottom {
+    transform: rotateX(90deg) translateY(var(--cube-half));
+    transform-origin: bottom center;
+    filter: grayscale(.3)
+}
+.\!front {
+    transform: translateZ(var(--cube-half));
+    filter: grayscale(.0);
+}
+.layer1 {
+    transform: rotate3d(0, 1, 0, 28deg) rotate3d(1, 0, 0, -20deg) translateY(100px);
+    will-change: transform;
+}
+.layer2 {
+    transform: rotate3d(0, 1, 0, 28deg) rotate3d(1, 0, 0, -20deg) translateY(25px) translateX(10px) translateZ(40px);
+    will-change: transform;
+}
+.layer3 {
+    transform: rotate3d(0, 1, 0, 28deg) rotate3d(1, 0, 0, -20deg) translateY(-55px) translateX(20px) translateZ(80px);
+    will-change: transform;
+}
+.plane {
+    margin-bottom: -75px;
+}
+#notice {
+    height: 0;
+    opacity: 0;
+    transition: height 100ms ease-in-out;
+}
